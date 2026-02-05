@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZEKQZSHOP.COM — Донат-платформа</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Анимация звёзд -->
+  <div class="stars-container" id="starsContainer"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">ZEKQZSHOP.COM</a>
+      <nav class="nav">
+        <a href="#" id="nav-login">Войти</a>
+        <a href="#" id="nav-register">Регистрация</a>
+        <a href="#" id="nav-dashboard" style="display:none;">Личный кабинет</a>
+        <a href="#" id="nav-admin" style="display:none;">Админ</a>
+        <a href="#" id="nav-logout" style="display:none;">Выйти</a>
+        <button class="shop-btn" id="nav-shop">Магазин</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Auth Modals -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Вход в систему</h2>
+      <input type="text" id="login-username" placeholder="Никнейм" />
+      <input type="password" id="login-password" placeholder="Пароль" />
+      <button class="btn" id="login-btn">Войти</button>
+      <p style="margin-top: 20px; color: #a0c0ff;">Нет аккаунта? <a href="#" id="go-to-register">Зарегистрироваться</a></p>
+    </div>
+  </div>
+
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Регистрация</h2>
+      <input type="text" id="register-username" placeholder="Никнейм (только латиница/цифры)" />
+      <input type="password" id="register-password" placeholder="Пароль (мин. 6 символов)" />
+      <button class="btn" id="register-btn">Зарегистрироваться</button>
+      <p style="margin-top: 20px; color: #a0c0ff;">Уже есть аккаунт? <a href="#" id="go-to-login">Войти</a></p>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="adminPanel" class="admin-panel">
+    <div class="container">
+      <h2>Админ-панель 🛡️</h2>
+      <div class="admin-stats">
+        <div class="stat-card">
+          <h3>Всего пользователей</h3>
+          <p id="admin-total-users">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Активных за день</h3>
+          <p id="admin-active-users">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Всего заказов</h3>
+          <p id="admin-total-orders">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Общий баланс</h3>
+          <p id="admin-total-balance">0 ₽</p>
+        </div>
+      </div>
+      <h3>Обращения в поддержку</h3>
+      <div class="tickets-list" id="admin-tickets-list">
+        <!-- Динамически заполняется -->
+      </div>
+      <h3>Пополнить баланс</h3>
+      <input type="text" id="admin-username" placeholder="Никнейм пользователя" />
+      <input type="number" id="admin-amount" placeholder="Сумма (₽)" min="1" />
+      <button class="btn" id="admin-add-balance">Добавить баланс</button>
+    </div>
+  </div>
+
+  <!-- User Dashboard -->
+  <div id="userDashboard" class="dashboard">
+    <div class="container">
+      <div class="user-panel">
+        <h2>Привет, <span id="user-name">Гость</span>!</h2>
+        <div class="user-info">
+          <div class="info-card">
+            <h3>Баланс</h3>
+            <p id="user-balance">0 ₽</p>
+            <button class="balance-btn" id="add-balance-btn">Пополнить</button>
+          </div>
+          <div class="info-card">
+            <h3>Регистрация</h3>
+            <p id="user-joined">—</p>
+          </div>
+          <div class="info-card">
+            <h3>Последний вход</h3>
+            <p id="user-last-login">—</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- История покупок -->
+      <div class="history-section">
+        <h3>🛒 История покупок</h3>
+        <ul class="history-list" id="user-history-list">
+          <!-- Динамически заполняется -->
+        </ul>
+      </div>
+
+      <!-- Поддержка -->
+      <div class="support-section">
+        <h3>📩 Поддержка</h3>
+        <input type="text" id="support-subject" placeholder="Тема обращения" style="width: 100%; padding: 10px; margin-bottom: 10px;" />
+        <textarea id="support-message" placeholder="Опишите вашу проблему" style="width: 100%; padding: 10px; height: 100px; margin-bottom: 15px;"></textarea>
+        <button class="btn" id="send-support">Отправить обращение</button>
+        <p style="color: #a0c0ff; margin-top: 15px;">Вы также можете написать в <a href="https://t.me/zekqzshophellp_bot" target="_blank" style="color: #00f5ff;">Telegram-бота</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Магазин -->
+  <div id="shopView" class="shop-section">
+    <div class="container">
+      <h2>🏪 ZEKQZSHOP.COM — ЛУЧШИЙ ИНТЕРНЕТ МАГАЗИН ДЛЯ ПОПОЛНЕНИЯ БАЛАНСА ИГР</h2>
+      <div class="shop-grid" id="shop-grid">
+        <!-- Товары генерируются динамически -->
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="#" class="btn" id="back-to-dashboard">← Вернуться в личный кабинет</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Добро пожаловать в ZEKQZSHOP.COM</h1>
+      <p>Кибер-платформа для покупки скинов, аккаунтов, бустов и привилегий. Безопасно. Быстро. Без посредников.</p>
+      <a href="#" class="btn" id="hero-btn">Начать</a>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
